@@ -1,3 +1,4 @@
+" Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -19,7 +20,7 @@ Plugin 'tpope/vim-fugitive'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
+"Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -27,14 +28,30 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
+" Navigaion
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-vinegar'
-Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'tpope/vim-commentary'
+
+" TypeScript
+Plugin 'leafgarland/typescript-vim'
+Plugin 'HerringtonDarkholme/yats.vim'
+"Plugin 'Quramy/vim-js-pretty-template'
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'Quramy/tsuquyomi'
+
+Plugin 'Valloric/YouCompleteMe'
+
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
 Plugin 'docunext/closetag.vim'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'airblade/vim-gitgutter'
+
+" Look & Feel
+Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,8 +68,29 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" CtrlP - define root search directory to current
+let g:ctrlp_working_path_mode = 'ra'
+" CtrlP - exclude directories and files from search
+let g:ctrlp_custom_ignore = 'node_modules\|target'
+
+"autocmd FileType javascript JsPreTmpl html
+"autocmd FileType typescript JsPreTmpl html
+
+" YouCompleteMe - enable TypeScript autocomplete
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
-endif
+endif 
 
+" General
 set number
+
+set autoread
+
+"set nowrap
+
+set hlsearch
